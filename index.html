@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>tz-tv YouTube Player</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; overflow: hidden; background: black; height: 100%;
+  }
+  #player {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+<div id="player"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let player;
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoId = urlParams.get('video') || 'dQw4w9WgXcQ';
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: videoId,
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        modestbranding: 1,
+        rel: 0,
+        iv_load_policy: 3,
+        disablekb: 1
+      },
+      events: {
+        onReady: event => {
+          event.target.unMute();
+          event.target.setVolume(100); // Start at full volume, but muted if system/game muted
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>
