@@ -32,12 +32,15 @@
         modestbranding: 1,
         rel: 0,
         iv_load_policy: 3,
-        disablekb: 1
+        disablekb: 1,
+        mute: 1  // mute on start to allow autoplay in some browsers
       },
       events: {
         onReady: event => {
-          event.target.unMute();
-          event.target.setVolume(100); // Start at full volume, but muted if system/game muted
+          event.target.playVideo();
+          setTimeout(() => {
+            event.target.unMute();
+          }, 1000); // Unmute after 1 second delay
         }
       }
     });
