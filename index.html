@@ -45,6 +45,22 @@
       }
     });
   }
+
+  window.addEventListener('message', (event) => {
+  if (event.data?.type === 'setVolume') {
+    let volume = event.data.volume;
+    if (player && player.setVolume) {
+      player.setVolume(Math.floor(volume * 100)); // YouTube API volume range: 0-100
+      if (volume > 0) {
+        player.unMute();
+      } else {
+        player.mute();
+      }
+    }
+  }
+});
+
+  
 </script>
 </body>
 </html>
